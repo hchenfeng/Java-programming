@@ -15,6 +15,6 @@ public class Main {
         // Pick 6 random numbers between 1 and 49 (inclusive)
         int[] number = secureRandom.ints(1, 50).distinct().limit(6).toArray();
         System.out.println("Play this combination--it'll make you rich!");
-        System.out.println(Arrays.toString(number));
+//        System.out.println(Arrays.toString(number));
     }
 }
