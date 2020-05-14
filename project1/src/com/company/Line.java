@@ -26,7 +26,8 @@ public class Line {
      *           this Line object
      */
     public Line(Point p1, Point p2) {
-
+        this.p1 = p1;
+        this.p2 = p2;
     }
 
     /**
@@ -39,8 +40,11 @@ public class Line {
      * @return the slope of this Line object
      */
     public double getSlope() {
-        // TO DO
-        return 0.0;
+        try {
+            return (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
+        } catch (Exception e) {
+            throw new ArithmeticException();
+        }
     }
 
     /**
@@ -50,8 +54,7 @@ public class Line {
      * @return the distance
      */
     public double getDistance() {
-        // TO DO
-        return 0.0;
+        return p1.manhattanDistance(p2);
     }
 
     /**
@@ -60,8 +63,10 @@ public class Line {
      * @return a Point object
      */
     public Point getMidpoint() {
-        // TO DO
-        return null;
+        Point newPoint = new Point();
+        newPoint.setX((p1.getX() - p2.getX()) / 2);
+        newPoint.setY((p1.getY() - p2.getY()) / 2);
+        return newPoint;
     }
 
     /**
@@ -74,8 +79,7 @@ public class Line {
      * otherwise.
      */
     public boolean parallelTo(Line line) {
-        // TO DO
-        return false;
+        return Double.compare(getSlope(), line.getSlope()) == 0;
     }
 
     /**
@@ -88,7 +92,9 @@ public class Line {
      * otherwise.
      */
     public boolean equals(Object obj) {
-        // TO DO
+        if (obj instanceof Line) {
+            return this.parallelTo((Line) obj) && (this.p1 == ((Line) obj).p1 || this.p2 == ((Line) obj).p2);
+        }
         return false;
     }
 
