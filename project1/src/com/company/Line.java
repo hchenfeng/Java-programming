@@ -12,6 +12,8 @@ public class Line {
      * @param y1 and y2 the y coordinates of p1 and p2
      */
     public Line(int x1, int y1, int x2, int y2) {
+        p1 = new Point();
+        p2 = new Point();
         p1.setX(x1);
         p1.setY(y1);
         p2.setX(x2);
