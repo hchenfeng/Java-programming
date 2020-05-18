@@ -43,10 +43,12 @@ public class Point {
         } else if (str.matches(" +")) {
             this.x = 0;
             this.y = 0;
-        } else {
+        } else if (str.matches("^([1-9])*([0-9]),([1-9])*([0-9])$")) {
             inputFields = str.split(",", 2);
             this.x = Integer.parseInt(inputFields[0]);
             this.y = Integer.parseInt(inputFields[1]);
+        } else {
+            throw new IllegalArgumentException("Expected input format should be like \"3,4\".");
         }
     }
 

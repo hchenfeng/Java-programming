@@ -70,8 +70,8 @@ public class Line {
      */
     public Point getMidpoint() {
         Point midPoint = new Point();
-        midPoint.setX((p1.getX() - p2.getX()) / 2);
-        midPoint.setY((p1.getY() - p2.getY()) / 2);
+        midPoint.setX((p1.getX() + p2.getX()) / 2);
+        midPoint.setY((p1.getY() + p2.getY()) / 2);
         return midPoint;
     }
 
