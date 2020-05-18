@@ -10,7 +10,6 @@ public class Point {
      * coordinates set to 0.
      */
     public Point() {
-
     }
 
     /**
@@ -36,15 +35,19 @@ public class Point {
      *            as "10,20".
      */
     public Point(String str) {
-        try {
-
-            String[] inputFields = str.split(",", 2);
+        String[] inputFields;
+        if (str == null) {
+            throw new IllegalArgumentException("Input is null.");
+        } else if (str.split(",", 2).length > 2) {
+            throw new IllegalArgumentException("Input contains more that 2 values.");
+        } else if (str.matches(" +")) {
+            this.x = 0;
+            this.y = 0;
+        } else {
+            inputFields = str.split(",", 2);
             this.x = Integer.parseInt(inputFields[0]);
             this.y = Integer.parseInt(inputFields[1]);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
         }
-
     }
 
     /**
@@ -55,8 +58,12 @@ public class Point {
      *              object
      */
     public Point(Point other) {
-        this.x = other.x;
-        this.y = other.y;
+        if (other == null) {
+            throw new NullPointerException("Other point is null.");
+        } else {
+            this.x = other.x;
+            this.y = other.y;
+        }
     }
 
     /**
@@ -92,7 +99,7 @@ public class Point {
      * @return a string representation of this Point's value.
      */
     public String toString() {
-        return String.format("(%s, %s)", x, y);
+        return String.format("(%s,%s)", x, y);
     }
 
     /**

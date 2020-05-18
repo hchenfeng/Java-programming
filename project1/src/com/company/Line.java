@@ -26,8 +26,12 @@ public class Line {
      *           this Line object
      */
     public Line(Point p1, Point p2) {
-        this.p1 = p1;
-        this.p2 = p2;
+        if (p1 == p2) {
+            throw new IllegalArgumentException("The two points used to define a line cannot be the same.");
+        } else {
+            this.p1 = p1;
+            this.p2 = p2;
+        }
     }
 
     /**
@@ -40,10 +44,10 @@ public class Line {
      * @return the slope of this Line object
      */
     public double getSlope() {
-        try {
-            return (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
-        } catch (Exception e) {
-            throw new ArithmeticException();
+        if (p1.getX() == p2.getX()) {
+            throw new ArithmeticException("Slope is undefined");
+        } else {
+            return ((double) p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
         }
     }
 
@@ -54,7 +58,7 @@ public class Line {
      * @return the distance
      */
     public double getDistance() {
-        return p1.manhattanDistance(p2);
+        return Math.sqrt(Math.pow(Math.abs(p1.getX() - p2.getX()), 2) + Math.pow(Math.abs(p1.getY() - p2.getY()), 2));
     }
 
     /**
@@ -63,10 +67,10 @@ public class Line {
      * @return a Point object
      */
     public Point getMidpoint() {
-        Point newPoint = new Point();
-        newPoint.setX((p1.getX() - p2.getX()) / 2);
-        newPoint.setY((p1.getY() - p2.getY()) / 2);
-        return newPoint;
+        Point midPoint = new Point();
+        midPoint.setX((p1.getX() - p2.getX()) / 2);
+        midPoint.setY((p1.getY() - p2.getY()) / 2);
+        return midPoint;
     }
 
     /**
@@ -79,7 +83,9 @@ public class Line {
      * otherwise.
      */
     public boolean parallelTo(Line line) {
-        return Double.compare(getSlope(), line.getSlope()) == 0;
+        if (p1.getX() == p2.getX() && line.p1.getX() == line.p2.getX()) {
+            return true;
+        } else return Math.abs(getSlope() - line.getSlope()) <= Math.ulp(Math.abs(getSlope() - line.getSlope()));
     }
 
     /**
