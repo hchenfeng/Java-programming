@@ -1,0 +1,22 @@
+3166 59.95 Introduction to Algorithms
+7281 87.50 Data Structures in Java
+5583 88.25 Data Structures in C++
+7129 75.00 Real-Time Systems
+4386 80.50 Machine Learning
+7231 85.95 Machine Vision
+9012 50.00 Real-Time Systems
+8201 45.90 Computer Organization
+9204 40.50 Introduction to Computing Systems
+7729 72.95 Computer Architecture
+3294 88.45 Computer Organization
+2053 78.90 Advanced Computer Architecture
+8076 68.50 Computer Systems
+2134 59.95 Computer Security
+3724 62.45 Principles of Computer Organization
+1865 82.75 Java Collection Framework
+4256 58.99 Computer Architecture and Organization
+9361 76.99 Database Management Systems
+7263 87.45 Advanced Database Management Systems
+2435 45.95 Data Communications
+3752 42.11 Introduction to Logic Design
+7269 57.75 Fundamentals of Digital Logic Design
