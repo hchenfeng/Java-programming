@@ -1,6 +1,6 @@
 package com.company;
 
-public class Book {
+public class Book implements Comparable<Book> {
     private String title;
     private double price;
     private int code;
@@ -33,5 +33,10 @@ public class Book {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    @Override
+    public int compareTo(Book anotherBook) {
+        return this.getCode() - anotherBook.getCode();
     }
 }

@@ -1,32 +1,76 @@
 package com.company;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BookListDemo {
 
     public static void main(String[] args) {
+
+        String inputFilePath = "./src/proj2.txt";
+        String outputFilePath = "./src/proj2Out.txt";
+        File outputFile = new File(outputFilePath);
+
+
         // create an object of BookList
+        BookList bookList = new BookList();
+
         try {
-            Scanner in = new Scanner(new File("src/proj2.txt"));
+            File file = new File(inputFilePath);
+            Scanner in = new Scanner(file);
             int code;
             double price;
             String title;
             while (in.hasNextLine()) {
-
-// read code
-// read price
+//                System.out.println(in.nextLine());
+                String line = in.nextLine();
+                String[] tokens = line.split(" ");
+                String[] titleArray;
+                int tokenLength = tokens.length;
+                // read code
+                code = Integer.parseInt(tokens[0]);
+                // read price
+                price = Double.parseDouble(tokens[1]);
                 // read title
-// create a Book object with the input data in variables title, price, and code
-// add it to the BookList object that you created earlier
+                titleArray = Arrays.copyOfRange(tokens, 2, tokenLength);
+                title = String.join(" ", titleArray);
+
+                // create a Book object with the input data in variables title, price, and code
+                Book book = new Book(title, price, code);
+
+                // add it to the BookList object that you created earlier
+                bookList.addBook(book);
             }
             in.close();
         } catch (Exception exception) {
             System.out.println("Error processing file: " + exception);
         }
-// use methods of class BookList to manipulate the BookList object
-// write the resulting book list into a text file
+        // use methods of class BookList to manipulate the BookList object
+        // write the resulting book list into a text file
+        System.out.println(bookList.toString());
+        writeToFile(bookList.toString(), outputFile);
+    }
 
 
+    static void writeToFile(String input, File outputPath) {
+        try {
+            if (!outputPath.exists()) {
+                outputPath.createNewFile();
+            }
+            FileOutputStream fileOutputStream=new FileOutputStream(outputPath);
+            fileOutputStream.write(input.getBytes());
+            fileOutputStream.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }

@@ -1,14 +1,14 @@
 package com.company;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class BookList {
     // holds a list of Book objects
-    private final ArrayList<Book> books;
+    private final TreeSet<Book> books;
 
     // constructor
-    public BookList(ArrayList<Book> books) {
-        this.books = books;
+    public BookList() {
+        this.books = new TreeSet<>();
     }
 
     // returns the size of the list
@@ -30,6 +30,7 @@ public class BookList {
     // returns the object with the given title
     // if it is found; otherwise returns null
     public Book findBook(String title) {
+//        Collections.sort(books);
         for (Book book : books) {
             if (book.getTitle().equals(title)) {
                 return book;
@@ -49,5 +50,11 @@ public class BookList {
 
     // returns a textual representation of all
     // the books in the list
-//    public String toString() { }
+    public String toString() {
+        StringBuilder books = new StringBuilder();
+        for (Book book : this.books) {
+            books.append(String.format("%s %.2f %s%n", book.getCode(), book.getPrice(), book.getTitle()));
+        }
+        return books.toString();
+    }
 }
