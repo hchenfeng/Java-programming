@@ -35,17 +35,41 @@ public class ScoreList {
      * Stops reading when the array is full or no more input.
      */
     public void loadList(Scanner scanner) {
-            System.out.println("Enter score(s):");
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (line.isEmpty()) {
-                    return;
-                } else if (size < list.length) {
-                    list[size] = Integer.parseInt(line);
-                    size++;
+        System.out.println("Please enter a non-negative integer as a score.");
+        System.out.println("Press ENTER after each entry.");
+        System.out.println("An empty line after any valid input would " +
+                "signal an end to entering scores.");
+        System.out.println("Enter score(s):");
+        // Variable for registering if an input line is the first empty input.
+        boolean firstEmpty = true;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            // Check if input is empty.
+            if (line.isEmpty()) {
+                if (firstEmpty) {
+                    // If this is the first empty line or the empty line before any
+                    // valid input, ask for a non-empty integer input.
+                    System.out.println("Input needs to be a non-negative integer. Try again: ");
+                } else {
+                    // If this is not the first empty line, break out of the scanner loop.
+                    break;
                 }
+            } else if (!(line.matches("^\\d+$"))) {
+                // If input is not a non-negative integer, ask for retry.
+                System.out.println("Input needs to be a non-negative integer. Try again: ");
+            } else if (size < list.length) {
+                list[size] = Integer.parseInt(line);
+                size++;
+                // Next empty line would end current scanner session.
+                firstEmpty = false;
+            } else {
+                // If getting more than 50 scores, end scanner session.
+                System.out.println("Cannot accept more than 50 scores.");
+                break;
             }
+
         }
+    }
 
     /**
      * Searches the list for a score and returns its index
