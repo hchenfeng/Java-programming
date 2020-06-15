@@ -39,4 +39,13 @@ public class Book implements Comparable<Book> {
     public int compareTo(Book anotherBook) {
         return this.getCode() - anotherBook.getCode();
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", price=" + price +
+                ", code=" + code +
+                '}';
+    }
 }

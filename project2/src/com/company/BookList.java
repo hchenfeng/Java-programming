@@ -4,11 +4,11 @@ import java.util.*;
 
 public class BookList {
     // holds a list of Book objects
-    private final TreeSet<Book> books;
+    private final ArrayList<Book> books;
 
     // constructor
     public BookList() {
-        this.books = new TreeSet<>();
+        this.books = new ArrayList<>();
     }
 
     // returns the size of the list
@@ -18,7 +18,21 @@ public class BookList {
 
     // inserts object book at its proper position
     public void addBook(Book book) {
-        books.add(book);
+        if ((getSize() == 0 || books.get(getSize() - 1).compareTo(book) <= 0)) {
+            // If first book or new book code >= last book code in the arrayList (in ascending order),
+            // just append new book to the end of the arrayList.
+            books.add(book);
+        } else if (books.get(getSize() - 1).compareTo(book) > 0) {
+            // If new book code < last book code in the arrayList (in ascending order),
+            // search book list until find book with equal or smaller code,
+            // then insert book to position after the found position.
+            for (int i = getSize() - 2; i >= 0; i--) {
+                if (books.get(i).compareTo(book) <= 0) {
+                    books.add(i + 1, book);
+                    break;
+                }
+            }
+        }
     }
 
     // removes the object with the given title
@@ -30,7 +44,6 @@ public class BookList {
     // returns the object with the given title
     // if it is found; otherwise returns null
     public Book findBook(String title) {
-//        Collections.sort(books);
         for (Book book : books) {
             if (book.getTitle().equals(title)) {
                 return book;

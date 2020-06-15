@@ -2,11 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -18,18 +14,15 @@ public class BookListDemo {
         String outputFilePath = "./src/proj2Out.txt";
         File outputFile = new File(outputFilePath);
 
-
         // create an object of BookList
         BookList bookList = new BookList();
 
-        try {
-            File file = new File(inputFilePath);
-            Scanner in = new Scanner(file);
+        File file = new File(inputFilePath);
+        try (Scanner in = new Scanner(file)) {
             int code;
             double price;
             String title;
             while (in.hasNextLine()) {
-//                System.out.println(in.nextLine());
                 String line = in.nextLine();
                 String[] tokens = line.split(" ");
                 String[] titleArray;
@@ -48,7 +41,6 @@ public class BookListDemo {
                 // add it to the BookList object that you created earlier
                 bookList.addBook(book);
             }
-            in.close();
         } catch (Exception exception) {
             System.out.println("Error processing file: " + exception);
         }
@@ -59,12 +51,8 @@ public class BookListDemo {
     }
 
 
-    static void writeToFile(String input, File outputPath) {
-        try {
-            if (!outputPath.exists()) {
-                outputPath.createNewFile();
-            }
-            FileOutputStream fileOutputStream=new FileOutputStream(outputPath);
+    private static void writeToFile(String input, File outputPath) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(outputPath)) {
             fileOutputStream.write(input.getBytes());
             fileOutputStream.close();
             System.out.println("Successfully wrote to the file.");
