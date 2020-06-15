@@ -38,7 +38,11 @@ public class BookList {
     // removes the object with the given title
     // from the list if it is found
     public void removeBook(String title) {
-        books.remove(findBook(title));
+        if (!(findBook(title) == null)) {
+            books.remove(findBook(title));
+        } else {
+            System.out.println("Title not found. Unable to remove.");
+        }
     }
 
     // returns the object with the given title
@@ -55,8 +59,12 @@ public class BookList {
     // returns the total cost of all the books
     public double calcTotal() {
         double total = 0;
-        for (Book book : books) {
-            total += book.getPrice();
+        if (getSize() == 0) {
+            System.out.println("There is no books in the list.");
+        } else {
+            for (Book book : books) {
+                total += book.getPrice();
+            }
         }
         return total;
     }
@@ -65,9 +73,14 @@ public class BookList {
     // the books in the list
     public String toString() {
         StringBuilder books = new StringBuilder();
-        for (Book book : this.books) {
-            books.append(String.format("%s %.2f %s%n", book.getCode(), book.getPrice(), book.getTitle()));
+        if (getSize() == 0) {
+            System.out.println("There is no books in the list.");
+            return null;
+        } else {
+            for (Book book : this.books) {
+                books.append(String.format("%s %.2f %s%n", book.getCode(), book.getPrice(), book.getTitle()));
+            }
+            return books.toString();
         }
-        return books.toString();
     }
 }
