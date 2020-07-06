@@ -4,15 +4,15 @@ package com.company;
  * This class sorts an array, using the selection sort
  * algorithm
  */
-public class SelectionSorter {
-    private int[] a;
+public class SelectionSorter<T extends Comparable<T>> {
+    private final T[] a;
 
     /**
      * Constructs a selection sorter.
      *
      * @param anArray the array to sort
      */
-    public SelectionSorter(int[] anArray) {
+    public SelectionSorter(T[] anArray) {
         a = anArray;
     }
 
@@ -36,7 +36,7 @@ public class SelectionSorter {
     private int minimumPosition(int from) {
         int minPos = from;
         for (int i = from + 1; i < a.length; i++)
-            if (a[i] < a[minPos]) minPos = i;
+            if (a[i].compareTo(a[minPos]) > 0) minPos = i;
         return minPos;
     }
 
@@ -47,7 +47,7 @@ public class SelectionSorter {
      * @param j the second position to swap
      */
     private void swap(int i, int j) {
-        int temp = a[i];
+        T temp = a[i];
         a[i] = a[j];
         a[j] = temp;
     }
