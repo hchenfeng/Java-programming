@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ArrayQueue<T> {
 
-    private ArrayList<T> list;
+    private final ArrayList<T> list;
 
     public ArrayQueue() {
         // instantiate the queue/list
@@ -24,6 +24,9 @@ public class ArrayQueue<T> {
     // removes the element at the front of the queue and returns it
     // Throws IndexOutOfBoundsException if queue is empty
     public T deQueue() throws IndexOutOfBoundsException {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("The queue is empty.");
+        }
         return list.remove(0);
     }
 

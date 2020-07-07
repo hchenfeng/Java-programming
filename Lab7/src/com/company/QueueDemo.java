@@ -17,7 +17,7 @@ public class QueueDemo {
 
         // display all elements in the queue
         System.out.println("One element in queue:");
-        System.out.println(stringArrayQueue.toString());;
+        System.out.println(stringArrayQueue.toString());
 
         // add two strings to the queue
         stringArrayQueue.enQueue("are");
