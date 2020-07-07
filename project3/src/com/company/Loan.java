@@ -1,32 +1,48 @@
 package com.company;
 
 public abstract class Loan {
-    protected String name; // the applicant’s name
-    protected double interestRate; // the annual interest rate
-    protected int length;  // the length of the load in years
-    protected double principle;  // the principle
-    protected double monthlyPayment;  // the monthly payment
+    // the applicant’s name
+    protected String name;
+    // the annual interest rate
+    protected double interestRate;
+    // the length of the loan in years
+    protected int length;
+    // the principal
+    protected double principal;
+    // the monthly payment
+    protected double monthlyPayment;
 
     public Loan(String name, double rate, int years, double amount) {
         // constructor
+        this.name = name;
+        this.interestRate = rate;
+        this.length = years;
+        this.principal = amount;
     }
 
-    public String process() {// a template method
+    public String process() {
+        // a template method
         // call method calcMonthlyPayment()
+        calcMonthlyPayment();
         // call method makeSummary()
         // return the summary
-        return "";
+        return makeSummary();
     }
 
-    abstract public void calcMonthPayment(); //an abstract method
+    abstract public void calcMonthlyPayment(); //an abstract method
 
     public String makeSummary() {
         //make and return a summary on the loan
-        return null;
+        return String.format(
+                "Name                    :      %s%n" +
+                        "Principal               :      $ %,.2f%n" +
+                        "Annual Interest Rate    :      %.2f %%%n" +
+                        "Length of Loan in Years :      %s%n",
+                name, principal, interestRate * 100, length);
     }
 
     public String toString() {
-        return "Loan";
+        return process();
     }
 }
 

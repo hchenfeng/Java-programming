@@ -6,12 +6,19 @@ public class AmortizedLoan extends Loan {
         super(name, rate, years, amount);
     }
 
-    public void calcMonthPayment() {
+    public void calcMonthlyPayment() {
         // calculate the monthly payment using the appropriate formula
         // assign the result to the data field monthlyPayment
+        monthlyPayment = (principal * (interestRate / 12) *
+                Math.pow(1 + interestRate / 12, length * 12)) /
+                (Math.pow(1 + interestRate / 12, length * 12) - 1);
     }
 
     public String toString() {
-        return "Full Amortized Loan";
+        return String.format(
+                "Full Amortized Loan\n" +
+                        "%s" +
+                        "Monthly Payment         :      $ %,.2f",
+                super.toString(), monthlyPayment);
     }
 }

@@ -6,12 +6,17 @@ public class SimpleLoan extends Loan {
         super(name, rate, years, amount);
     }
 
-    public void calcMonthPayment() {
+    public void calcMonthlyPayment() {
         // calculate the monthly payment using the appropriate formula
         // assign the result to the data field monthlyPayment
+        monthlyPayment = (principal * (interestRate * length + 1)) / (length * 12);
     }
 
     public String toString() {
-        return "Simple Interest Loan";
+        return String.format(
+                "Simple Interest Loan%n" +
+                        "%s" +
+                        "Monthly Payment         :      $ %,.2f",
+                super.toString(), monthlyPayment);
     }
 }

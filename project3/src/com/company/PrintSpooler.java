@@ -13,6 +13,8 @@ public class PrintSpooler {
     public void printDocument(String s) {
         // print a document
         // print a header
+        System.out.println("--------------------------------------------------");
         System.out.println(s);
+        System.out.println("--------------------------------------------------");
     }
 }
