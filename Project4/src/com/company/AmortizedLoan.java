@@ -16,9 +16,11 @@ public class AmortizedLoan extends Loan {
 
     public String toString() {
         return String.format(
-                "Full Amortized Loan\n" +
+                "%s%n" +
                         "%s" +
-                        "Monthly Payment         :      $ %,.2f",
-                super.toString(), monthlyPayment);
+                        "%-20s%-5s%s%,.2f",
+                "Full Amortized Loan",
+                super.toString(),
+                "Monthly Payment", ":", "$", monthlyPayment);
     }
 }

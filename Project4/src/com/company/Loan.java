@@ -1,6 +1,6 @@
 package com.company;
 
-public abstract class Loan {
+public abstract class Loan implements Comparable<Loan> {
     // the applicant’s name
     protected String name;
     // the annual interest rate
@@ -20,6 +20,22 @@ public abstract class Loan {
         this.principal = amount;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public double getPrincipal() {
+        return principal;
+    }
+
     public String process() {
         // a template method
         // call method calcMonthlyPayment()
@@ -31,18 +47,30 @@ public abstract class Loan {
 
     abstract public void calcMonthlyPayment(); //an abstract method
 
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
     public String makeSummary() {
         //make and return a summary on the loan
         return String.format(
-                "Name                    :      %s%n" +
-                        "Principal               :      $ %,.2f%n" +
-                        "Annual Interest Rate    :      %.2f %%%n" +
-                        "Length of Loan in Years :      %s%n",
-                name, principal, interestRate * 100, length);
+                "%n%-20s%-5s%s%n" +
+                        "%-20s%-5s%s%,.2f%n" +
+                        "%-20s%-5s%,.2f%s%n" +
+                        "%-20s%-5s%s%n",
+                "Name", ":", name,
+                "Principal", ":", "$", principal,
+                "Annual Rate", ":", interestRate * 100,"%",
+                "Loan Length (Years)", ":", length);
     }
 
     public String toString() {
         return process();
+    }
+
+    @Override
+    public int compareTo(Loan o) {
+        return this.name.compareToIgnoreCase(o.name);
     }
 }
 

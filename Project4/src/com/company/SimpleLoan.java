@@ -14,9 +14,11 @@ public class SimpleLoan extends Loan {
 
     public String toString() {
         return String.format(
-                "Simple Interest Loan%n" +
+                "%s%n" +
                         "%s" +
-                        "Monthly Payment         :      $ %,.2f",
-                super.toString(), monthlyPayment);
+                        "%-20s%-5s%s%,.2f",
+                "Simple Interest Loan",
+                super.toString(),
+                "Monthly Payment", ":", "$", monthlyPayment);
     }
 }
