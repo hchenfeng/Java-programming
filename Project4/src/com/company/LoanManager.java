@@ -52,6 +52,15 @@ public class LoanManager {
         return null;
     }
 
+    public String generatedSaveText() {
+        StringBuilder str = new StringBuilder();
+        for (Loan l : loans) {
+            str.append(String.format("%s %s %s %s %s%n",
+                    l.getName(), l.getPrincipal(), l.getLength(), l.getInterestRate(), l.getLoanType()));
+        }
+        return str.toString();
+    }
+
     @Override
     public String toString() {
         return "LoanManager{" +

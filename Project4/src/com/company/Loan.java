@@ -11,6 +11,8 @@ public abstract class Loan implements Comparable<Loan> {
     protected double principal;
     // the monthly payment
     protected double monthlyPayment;
+    // loan type
+    protected int loanType;
 
     public Loan(String name, double rate, int years, double amount) {
         // constructor
@@ -18,7 +20,10 @@ public abstract class Loan implements Comparable<Loan> {
         this.interestRate = rate;
         this.length = years;
         this.principal = amount;
+        setLoanType();
     }
+
+    public abstract void setLoanType();
 
     public String getName() {
         return name;
@@ -34,6 +39,10 @@ public abstract class Loan implements Comparable<Loan> {
 
     public double getPrincipal() {
         return principal;
+    }
+
+    public int getLoanType() {
+        return loanType;
     }
 
     public String process() {

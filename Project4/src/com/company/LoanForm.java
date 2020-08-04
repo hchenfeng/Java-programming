@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class LoanForm extends JFrame {
 
@@ -68,9 +69,13 @@ public class LoanForm extends JFrame {
 
         String inputFilePath = "./src/loan.txt";
         String outputFilePath = "./src/loan.txt";
+        File inputFile = new File(inputFilePath);
         File outputFile = new File(outputFilePath);
 
-        loadDataFromFile();
+        if (inputFile.exists()) {
+            loadDataFromFile(inputFile, loanManager);
+        }
+
 
         addButton.addActionListener(e -> {
 //            loanType = getLoanType();
@@ -150,6 +155,7 @@ public class LoanForm extends JFrame {
 
         saveButton.addActionListener(e -> {
 //            saveLoan();
+            writeToFile(loanManager.generatedSaveText(), outputFile);
         });
 
         //
@@ -242,6 +248,40 @@ public class LoanForm extends JFrame {
                 "Amount of Money Borrowed", ":", totalAmountOfMoney);
 
         displayTextArea.setText(summary);
+    }
+
+    private void loadDataFromFile(File inputFile, LoanManager loanManager) {
+        try (Scanner in = new Scanner(inputFile)) {
+
+            String name;
+            double principal;
+            int length;
+            double rate;
+            int loanType;
+
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                String[] tokens = line.split(" ");
+                Loan loan = null;
+
+                name = tokens[0];
+                principal = Double.parseDouble(tokens[1]);
+                length = Integer.parseInt(tokens[2]);
+                rate = Double.parseDouble(tokens[3]);
+                loanType = Integer.parseInt(tokens[4]);
+
+                if (loanType == 1) {
+                    loan = new SimpleLoan(name, rate, length, principal);
+                } else if (loanType == 2) {
+                    loan = new AmortizedLoan(name, rate, length, principal);
+                }
+
+                loanManager.addLoan(loan);
+
+            }
+        } catch (Exception exception) {
+            System.out.println("Error processing file: " + exception);
+        }
     }
 
     private void writeToFile(String input, File outputPath) {

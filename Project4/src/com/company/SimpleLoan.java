@@ -6,6 +6,10 @@ public class SimpleLoan extends Loan {
         super(name, rate, years, amount);
     }
 
+    public void setLoanType() {
+        loanType = 1;
+    }
+
     public void calcMonthlyPayment() {
         // calculate the monthly payment using the appropriate formula
         // assign the result to the data field monthlyPayment

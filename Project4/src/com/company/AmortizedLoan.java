@@ -6,6 +6,10 @@ public class AmortizedLoan extends Loan {
         super(name, rate, years, amount);
     }
 
+    public void setLoanType() {
+        loanType = 2;
+    }
+
     public void calcMonthlyPayment() {
         // calculate the monthly payment using the appropriate formula
         // assign the result to the data field monthlyPayment
